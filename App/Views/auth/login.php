@@ -8,7 +8,7 @@
 <body>
 <div class="container mt-5">
     <h2>Connexion</h2>
-    <form action="/" method="POST" class="w-50">
+    <form action="/login" method="POST" class="w-50">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" name="email" required>
@@ -18,7 +18,7 @@
             <input type="password" class="form-control" name="password" required>
         </div>
         <button type="submit" class="btn btn-primary">Se connecter</button>
-        <p class="mt-3">Pas encore de compte ? <a href="register.php">S'inscrire</a></p>
+        <p class="mt-3">Pas encore de compte ? <a href="/register">S'inscrire</a></p>
     </form>
 </div>
 </body>

@@ -9,7 +9,7 @@ class Router{
 public function run()
   {
     
-    $path = $_SERVER['PATH_INFO'] ?? '/login';
+    $path = $_SERVER['PATH_INFO'] ?? '/logIn';
 
     switch ($path) {
         case "/home" :

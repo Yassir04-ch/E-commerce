@@ -137,8 +137,7 @@ class User{
               "' WHERE id = " . $this->id;
       $stmt = $this->conection->prepare($query);
       $stmt->execute();
-        return 0;
-    }
+     }
 
     
 }

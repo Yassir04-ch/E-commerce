@@ -1,5 +1,5 @@
 <?php
-namespace Models;
+namespace App\Models;
 
 class Order {
     private int $id;
@@ -7,14 +7,24 @@ class Order {
     private array $orderItems = [];
     private string $status;
 
-    public function __construct(int $id, Client $client, string $status = 'pending') {
+    public function getId(){
+        return $this->id;
+    }
+    public function setId(){
         $this->id = $id;
-        $this->client = $client;
-        $this->status = $status;
+    }
+    public function getClient(){
+        return $this->client;
+    }
+    public function setClient(Client $client){
+      $this->client = $client;
     }
 
-    public function addOrderItem(OrderItem $item): void {
-        $this->orderItems[] = $item;
+    public function getOrderitems(){
+        return $this->orderItems;
+    }
+    public function OrderItem(OrderItem $orderItems): void {
+        $this->orderItems[] = $orderItems;
     }
 
 }
