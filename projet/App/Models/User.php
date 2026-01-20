@@ -115,7 +115,7 @@ class User{
 
     public function create() {
         $sql = "INSERT INTO users
-            (`firstname`, `lastname`,`email`,`password`,`role`)
+            (`firstname`, `lastname`,`email`,`passsword`,`role`)
             VALUES (?, ?,?,?,?)";
         $stmt = $this->conection->prepare($sql);
         $stmt->execute([$this->firstname, $this->lastname, $this->email,$this->password,$this->role]);

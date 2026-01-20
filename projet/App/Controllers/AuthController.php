@@ -6,7 +6,7 @@ use App\Models\User;
 
 class AuthController{
       public function index($page) {
-            require "App/Views/auth/$page.php";
+           require __DIR__ . "/../Views/auth/$page.php";
        }
 
     public function create(){
@@ -44,7 +44,7 @@ class AuthController{
 }
 
 public function logout(){
-   Session::start();
+    Session::start();
     Session::destroy();
     header("Location: /login");
 }

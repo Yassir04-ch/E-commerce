@@ -1,6 +1,4 @@
-<?php
-session_start(); 
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +16,7 @@ session_start();
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <span class="nav-link">Hello, <?= $_SESSION['firstname']; ?>!</span>
+                    <span class="nav-link">Hello,!</span>
                 </li>
             </ul>
         </div>

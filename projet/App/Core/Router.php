@@ -1,75 +1,76 @@
 <?php
 
 namespace App\Core;
+
 use App\Controllers\AdminController;
 use App\Controllers\AuthController;
 use App\Controllers\FrontController;
 
-class Router{
+class Router
+{
+    public function run()
+    {
+        $uri = $_SERVER['REQUEST_URI'] ?? '/login';
 
-public function run()
-  {
-    
-    $path = $_SERVER['REQUEST_URI'] ?? '/register';
+        $path = parse_url($uri, PHP_URL_PATH);
 
-    switch ($path) {
-        case "//home" :
+        $path = rtrim($path, '/') ?: '/';
+
+        switch ($path) {
+
+            case '/':
+            case '/home':
                 echo "this is home";
-            break;
+                break;
 
-        case "//admin" :
+            case '/admin':
+                $controller = new AdminController();
+                $controller->index('admin');
+                break;
 
-            $controller = new AdminController();
-                $admin = $controller->index('admin');
-            
-            break;
-        case '//register':
-            $controller = new AuthController();
-            if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                $controller->create();
-            } 
+            case '/register':
+                $controller = new AuthController();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $controller->create();
+                }
+                $controller->index('register');
+                break;
 
-            $controller->index('register');
-        break;
-        case '//login':
-            $controller = new AuthController();
-            if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                $controller->login();
-            } 
-            $controller->index('login');
-        break;
-        case '//logout':
-            $controller = new AuthController();
-            if ($_SERVER['REQUEST_METHOD'] == "GET") {
-                $controller->logout();
-            } 
-            $controller->index('login');
-        break;
-        case '//delete':
-            $controller = new AdminController();
-            if ($_SERVER['REQUEST_METHOD'] == "GET") {
-                $controller->delete();
-            } 
-            $controller->index('admin');
-        break;
-        case '//update':
-            $controller = new AdminController();
-            if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            $controller->index('update');
-
-            }     
-            if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $controller->update();
-            }       
-
-        break;
-    case '//user':
-            $controller = new FrontController();
-            $controller->index();
-            break;
-        default : 
-            $controller = new AuthController();
+            case '/login':
+                $controller = new AuthController();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $controller->login();
+                }
                 $controller->index('login');
+                break;
+
+            case '/logout':
+                $controller = new AuthController();
+                $controller->logout();
+                break;
+
+            case '/delete':
+                $controller = new AdminController();
+                $controller->delete();
+                break;
+
+            case '/update':
+                $controller = new AdminController();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $controller->update();
+                } else {
+                    $controller->index('update');
+                }
+                break;
+
+            case '/user':
+                $controller = new FrontController();
+                $controller->index();
+                break;
+
+            default:
+                http_response_code(404);
+                echo "404 - Page not found";
+        }
     }
-  }
 }
