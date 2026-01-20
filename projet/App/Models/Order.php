@@ -6,6 +6,15 @@ class Order {
     private Client $client;
     private array $orderItems = [];
     private string $status;
+    
+    private PDO $conection;
+
+    
+    public function __construct()
+    {
+        
+        $this->conection = Database::getinstance()->getConn();
+     }
 
     public function getId(){
         return $this->id;
@@ -25,6 +34,12 @@ class Order {
     }
     public function OrderItem(OrderItem $orderItems): void {
         $this->orderItems[] = $orderItems;
+    }
+
+    public function addOrder(){
+      $sql = "INSERT INTO ordes (client_id,orderItems_id,status) VALUES (?,?,?,)";
+      $stmt = $this->conection->prepare($sql);
+      $stmt->execute([$this->client->getId()],$this->status);
     }
 
 }

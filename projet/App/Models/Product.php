@@ -74,4 +74,5 @@ class Product {
     public function setCategory(Category $category){
         $this->category = $category;
     }
+
 }

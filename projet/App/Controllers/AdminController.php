@@ -16,7 +16,7 @@ class AdminController{
         $id = $_GET['id'];
         $user = new User();
         $userr = $user->getUserbyid($id);
-        require "App\Views\back\update.php";
+        require "App\Views\back\updateproduct.php";
         break;
        }
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Core;
 use App\Controllers\AdminController;
 use App\Controllers\AuthController;
@@ -9,20 +10,20 @@ class Router{
 public function run()
   {
     
-    $path = $_SERVER['PATH_INFO'] ?? '/logIn';
+    $path = $_SERVER['REQUEST_URI'] ?? '/register';
 
     switch ($path) {
-        case "/home" :
+        case "//home" :
                 echo "this is home";
             break;
 
-        case "/admin" :
+        case "//admin" :
 
             $controller = new AdminController();
                 $admin = $controller->index('admin');
             
             break;
-        case '/register':
+        case '//register':
             $controller = new AuthController();
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $controller->create();
@@ -30,28 +31,28 @@ public function run()
 
             $controller->index('register');
         break;
-        case '/login':
+        case '//login':
             $controller = new AuthController();
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $controller->login();
             } 
             $controller->index('login');
         break;
-        case '/logout':
+        case '//logout':
             $controller = new AuthController();
             if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $controller->logout();
             } 
             $controller->index('login');
         break;
-        case '/delete':
+        case '//delete':
             $controller = new AdminController();
             if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $controller->delete();
             } 
             $controller->index('admin');
         break;
-        case '/update':
+        case '//update':
             $controller = new AdminController();
             if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $controller->index('update');
@@ -62,7 +63,7 @@ public function run()
             }       
 
         break;
-    case '/user':
+    case '//user':
             $controller = new FrontController();
             $controller->index();
             break;

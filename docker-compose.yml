@@ -1,29 +1,39 @@
-version: '3.8'
-
 services:
-  web:
-    build: .
-    ports:
-      - "8080:80"
-    volumes:
-      - .:/var/www/html
-    depends_on:
-      - db
-
-  db:
+  mysql:
     image: mysql:8.0
+    container_name: mycSql-container
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: ecommerce
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: MvcDatabase
     ports:
-      - "3307:3306"
+    -  "3306:3306"
+    volumes:
+    -  mysql_data:/var/lib/mysql
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: container_phpmyadmin
+    restart: always
     environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
     ports:
-      - "8081:80"
+     -  "8080:80"
     depends_on:
-      - db
+     - mysql
+  
+  php:
+    build: .
+    container_name: conteneur_php
+    restart: always
+    volumes:
+     - ./projet:/var/www/html
+    ports:
+     - "8000:80"
+    depends_on:
+     - mysql
+
+volumes:
+  mysql_data:

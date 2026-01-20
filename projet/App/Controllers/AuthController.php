@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controllers;
 use App\Core\Session;
 use App\Models\User;
+
 class AuthController{
       public function index($page) {
             require "App/Views/auth/$page.php";

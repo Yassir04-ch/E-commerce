@@ -11,14 +11,13 @@ class User{
     private string $password;
     private string $role;
  
-
     private PDO $conection;
 
 
     public function __construct()
     {
-        $database = new Database();
-        $this->conection = $database->getConn();
+        
+        $this->conection = Database::getinstance()->getConn();
      }
     
      

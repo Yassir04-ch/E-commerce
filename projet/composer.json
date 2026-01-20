@@ -1,5 +1,5 @@
 {
-    "name": "youcode/ll",
+    "name": "root/html",
     "autoload": {
         "psr-4": {
             "App\\": "App/"
@@ -7,8 +7,7 @@
     },
     "authors": [
         {
-            "name": "yassir cherqui",
-            "email": "yassirch245@gmail.com"
+            "name": "yassir"
         }
     ],
     "require": {}
