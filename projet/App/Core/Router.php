@@ -10,7 +10,7 @@ class Router
 {
     public function run()
     {
-        $uri = $_SERVER['REQUEST_URI'] ?? '/login';
+        $uri = $_SERVER['REQUEST_URI'] ?? '/accueil';
 
         $path = parse_url($uri, PHP_URL_PATH);
 
@@ -19,10 +19,15 @@ class Router
         switch ($path) {
 
             case '/':
-            case '/home':
-                echo "this is home";
+            case '/accueil':
+                require __DIR__ . "/../Views/auth/Accuel.php";
                 break;
-
+                 case '/dach':
+                require __DIR__ . "/../Views/back/Dashboard.php";
+                break; case '/category':
+                require __DIR__ . "/../Views/front/Categorie.php";
+                break; case '/product':
+                require __DIR__ . "/../Views/front/Product.php";
             case '/admin':
                 $controller = new AdminController();
                 $controller->index('admin');
