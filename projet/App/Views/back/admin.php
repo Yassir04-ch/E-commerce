@@ -19,7 +19,7 @@
   <h1>Dashboard</h1>
   <div class="row mt-4">
     <div class="col-md-4">
-      <a href="products.php" class="btn btn-primary w-100 mb-2">Gérer Produits</a>
+      <a href="/add" class="btn btn-primary w-100 mb-2">Gérer Produits</a>
     </div>
     <div class="col-md-4">
       <a href="users.php" class="btn btn-secondary w-100 mb-2">Gérer Utilisateurs</a>

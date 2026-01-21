@@ -130,7 +130,7 @@ class User{
  public function updateuser() {
         $query = 
             "UPDATE users    
-             SET firstname='" . $this->firstname . "' , lastname='". $this->lastname 
+             SET firstname='" . $this->firstname . "' ,lastname='". $this->lastname 
              ."' , email='". $this->email ."' , password='". $this->password . "' , role='". $this->role .
               "' WHERE id = " . $this->id;
       $stmt = $this->conection->prepare($query);

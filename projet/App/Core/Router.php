@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Core;
-
 use App\Controllers\AdminController;
 use App\Controllers\AuthController;
 use App\Controllers\FrontController;
@@ -31,6 +29,13 @@ class Router
             case '/admin':
                 $controller = new AdminController();
                 $controller->index('admin');
+                break;
+                 case '/add':
+                $controller = new AdminController();
+                $controller->index('addproduct');
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $controller->addproduct();
+                }
                 break;
 
             case '/register':

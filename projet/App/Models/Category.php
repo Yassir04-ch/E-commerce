@@ -41,6 +41,14 @@ class Category {
     public function updateCategory(){
 
     }
+
+    public function getCategoryByName($name){
+        $sql = "SELECT * FROM category WHERE name = ?";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->execute([$name]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS,Category::class);
+          return $stmt->fetch();
+    }
 }
 
 

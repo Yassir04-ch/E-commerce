@@ -1,5 +1,5 @@
 <?php
-namespace Models;
+namespace App\Models;
 use PDO;
 use  App\Core\Database;
 
@@ -86,32 +86,40 @@ class Product {
     public function setCategory(Category $category){
         $this->category = $category;
     }
-    
-    public function addProduct(){
-        $sql = "INSERT INTO products (name,description,price,image,strock,category_id) VALUES(?,?,?,?,?)";
+     public function addProduct()
+    {
+        $sql = "INSERT INTO products (name, description, price, stock, image, category_id)
+                VALUES (?, ?, ?, ?, ?, ?)";
+
         $stmt = $this->conection->prepare($sql);
-        $stmt->execute([$this->name,$this->description,$this->price,
-        $this->image,$this->strock,$this->getCategory()->getId()]);
-    }
-    public function getProducts(){
-        $sql = "SELECT * FROM products join category ON category.id = products.category_id";
-        $stmt = $this->conection->prepare($sql);
-        $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_CLASS, Product::class);
-        $stmt->fetch();
+         $stmt->execute([$this->name,$this->description,$this->price,
+         $this->stock,$this->image,$this->category->getId()]);
     }
 
-    public function updateProduct(){
-        $sql = "UPDATE products SET name = $this->name , description = $this->description,
-         price = $this->price ,strock = $this->stock WHERE id = $this->id ";
-         $stmt->this->conection->prepare();
-         $stmt->execute();
+    public function getAllProduct(){
+    $sql = "SELECT p.id, p.name, p.description, p.price, p.stock, p.image,
+            c.id as category_id, c.name as category_name
+            FROM products p
+            JOIN category c ON p.category_id = c.id";
+    $stmt = $this->conection->prepare($sql);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_CLASS,Product::class);
+    return $stmt->fetchAll();
+}
+
+    public function updatePdoduct()
+    {
+        $sql = "UPDATE products SET name = ?, description = ?, price = ?, stock = ?, image = ?, category_id= ? WHERE id=?";
+         $stmt = $this->conection->prepare($sql);
+         $stmt->execute([$product->getName(),$product->getDescription(),$product->getPrice(),
+           $product->getStock(),$product->getImage(),$product->category()->getId()]);
     }
 
-    public function deleteProduct($id){
-        $sql = "DELETE FROM products WHERE id = ?";
-        $stmt = $this->conection->prepare();
-        $stmt->execute([$id]);
+    public function delete(int $id)
+    {
+        $stmt = $this->conection->prepare("DELETE FROM products WHERE id=?");
+        return $stmt->execute([$id]);
     }
+
 
 }

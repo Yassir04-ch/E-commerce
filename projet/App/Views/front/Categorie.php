@@ -74,141 +74,43 @@
 
             <div class="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 
-                <div class="product-card bg-black border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 group">
-                    <div class="relative aspect-square overflow-hidden bg-slate-900/50">
-                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=400" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
-                        <div class="absolute top-4 right-4 space-y-2">
-                            <button class="w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
-                                <i class="far fa-heart"></i>
+                
+                
+                 
+                 <div class="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                    <?php if(!empty($products)): ?>
+                <?php foreach($products as $product): ?>
+                    <div class="product-card bg-black border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 group">
+                        <div class="relative aspect-square overflow-hidden bg-slate-900/50">
+                            <img src="<?= $product->getImage() ?>" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
+                            <div class="absolute top-4 right-4 space-y-2">
+                                <button class="w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest"><?= $product->getName()  ?></span>
+                                    <h3 class="text-white font-bold text-lg mt-1 group-hover:text-blue-400 transition-colors"><?= $product->getDescription()  ?></h3>
+                                </div>
+                                <span class="text-white font-black"><?= $product->getPrice() ?> DH</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase">
+                                <i class="fas fa-check-circle text-blue-500"></i> <?= $product->getStock()  ?>
+                            </div>
+                            <button class="w-full bg-white text-black font-black py-4 rounded-2xl text-xs uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white transition-all">
+                                Add to Cart
                             </button>
                         </div>
                     </div>
-                    
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest">Apple</span>
-                                <h3 class="text-white font-bold text-lg mt-1 group-hover:text-blue-400 transition-colors">MacBook Pro M3 Max</h3>
-                            </div>
-                            <span class="text-white font-black">22,500 DH</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase">
-                            <i class="fas fa-check-circle text-blue-500"></i> High Performance Chip
-                        </div>
-                        <button class="w-full bg-white text-black font-black py-4 rounded-2xl text-xs uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white transition-all">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-                 <div class="product-card bg-black border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 group">
-                    <div class="relative aspect-square overflow-hidden bg-slate-900/50">
-                        <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&q=80&w=300" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
-                        <div class="absolute top-4 right-4 space-y-2">
-                            <button class="w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest">Apple</span>
-                                <h3 class="text-white font-bold text-lg mt-1 group-hover:text-blue-400 transition-colors">MacBook Pro M3 Max</h3>
-                            </div>
-                            <span class="text-white font-black">22,500 DH</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase">
-                            <i class="fas fa-check-circle text-blue-500"></i> High Performance Chip
-                        </div>
-                        <button class="w-full bg-white text-black font-black py-4 rounded-2xl text-xs uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white transition-all">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-                 <div class="product-card bg-black border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 group">
-                    <div class="relative aspect-square overflow-hidden bg-slate-900/50">
-                       <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&q=80&w=300" 
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
-                        <div class="absolute top-4 right-4 space-y-2">
-                            <button class="w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest">Apple</span>
-                                <h3 class="text-white font-bold text-lg mt-1 group-hover:text-blue-400 transition-colors">MacBook Pro M3 Max</h3>
-                            </div>
-                            <span class="text-white font-black">22,500 DH</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase">
-                            <i class="fas fa-check-circle text-blue-500"></i> High Performance Chip
-                        </div>
-                        <button class="w-full bg-white text-black font-black py-4 rounded-2xl text-xs uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white transition-all">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-                 <div class="product-card bg-black border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 group">
-                    <div class="relative aspect-square overflow-hidden bg-slate-900/50">
-                        <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&q=80&w=300"                      
-                               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100">
-                        <div class="absolute top-4 right-4 space-y-2">
-                            <button class="w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="text-blue-500 font-black text-[10px] uppercase tracking-widest">Apple</span>
-                                <h3 class="text-white font-bold text-lg mt-1 group-hover:text-blue-400 transition-colors">MacBook Pro M3 Max</h3>
-                            </div>
-                            <span class="text-white font-black">22,500 DH</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase">
-                            <i class="fas fa-check-circle text-blue-500"></i> High Performance Chip
-                        </div>
-                        <button class="w-full bg-white text-black font-black py-4 rounded-2xl text-xs uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white transition-all">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <div class="product-card bg-black border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 group">
-                    <div class="relative aspect-square overflow-hidden bg-slate-900/50">
-                        <img src="https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 opacity-80 group-hover:opacity-100 transition-all duration-700">
-                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase italic">Latest</span>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div><span class="text-blue-500 font-black text-[10px] uppercase tracking-widest">Apple</span><h3 class="text-white font-bold text-lg mt-1">iPhone 15 Pro Max</h3></div>
-                            <span class="text-white font-black">14,200 DH</span>
-                        </div>
-                        <button class="w-full bg-white text-black font-black py-4 rounded-2xl text-xs uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white transition-all">Add to Cart</button>
-                    </div>
-                </div>
-
-                <div class="product-card bg-black border border-white/5 rounded-3xl overflow-hidden transition-all duration-500 group">
-                    <div class="relative aspect-square overflow-hidden bg-slate-900/50">
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=400" class="w-full h-full object-cover group-hover:scale-110 opacity-80 group-hover:opacity-100 transition-all duration-700">
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div><span class="text-blue-500 font-black text-[10px] uppercase tracking-widest">Sony</span><h3 class="text-white font-bold text-lg mt-1">Sony WH-1000XM5</h3></div>
-                            <span class="text-white font-black">3,500 DH</span>
-                        </div>
-                        <button class="w-full bg-white text-black font-black py-4 rounded-2xl text-xs uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white transition-all">Add to Cart</button>
-                    </div>
-                </div>
+                <?php endforeach; ?>
+                    <?php else: ?>
+                    <p class="text-white">No product her</p>
+                <?php endif; ?>
+            </div>
 
             </div>
         </div>
