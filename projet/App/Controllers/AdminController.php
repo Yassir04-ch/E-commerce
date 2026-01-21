@@ -9,8 +9,7 @@ class AdminController{
         case 'admin':
         $user = new User();
         $users = $user->findAll();
-        Session::start();
-        require "App\Views\back\admin.php";
+       require __DIR__ . "/../Views/back/admin.php";
         break;
        case 'update':
         $id = $_GET['id'];

@@ -68,7 +68,7 @@ class Router
                 }
                 break;
 
-            case '/user':
+            case '/client':
                 $controller = new FrontController();
                 $controller->index();
                 break;

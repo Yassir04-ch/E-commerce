@@ -1,14 +1,17 @@
 <?php
 namespace App\Core;
+
 use PDO;
 use PDOException;
 
 class Database {
-    private static ?Database $instance = null;
-    private ?PDO $conn = null;
+    private static ?PDO $conn = null;
 
-    private function __construct() {
-        try {
+    public static function getConn(){
+
+        if(self::$conn == null){
+
+            try{
             $host = 'mysql';
             $dbname = 'MvcDatabase';
             $user = 'root';
@@ -16,23 +19,17 @@ class Database {
             $port = 3306;
 
             $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+            self::$conn = new PDO($dsn, $user, $pass);
+            self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $this->conn = new PDO($dsn, $user, $pass, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-            ]);
-        } catch (PDOException $e) {
-            die('Database error: ' . $e->getMessage());
+            }
+            catch(PDOException $e){
+                die("Erreur de connexion au base de donnee " .$e->getMessage());
+            }
+
         }
-    }
+        return self::$conn;
 
-    public static function getInstance(): Database {
-        if (self::$instance === null) {
-            self::$instance = new Database();
-        }
-        return self::$instance;
-    }
 
-    public function getConn(): PDO {
-        return $this->conn;
     }
 }

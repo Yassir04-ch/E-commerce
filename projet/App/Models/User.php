@@ -4,7 +4,7 @@ use  App\Core\Database;
 use PDO;
 
 class User{
-    private INT $id;
+    private int $id;
     private string $firstname;
     private string $lastname;
     private string $email;
@@ -17,7 +17,7 @@ class User{
     public function __construct()
     {
         
-        $this->conection = Database::getinstance()->getConn();
+        $this->conection = Database::getConn();
      }
     
      
@@ -69,14 +69,13 @@ class User{
 
     public function getPassword()
     {
-                return $this->password;
+        return $this->password;
     }
 
          
     public function setPassword($password)
     {
      $this->password = $password;
-
     }
     
 
@@ -109,14 +108,14 @@ class User{
     $query = "SELECT * FROM users WHERE id = ?";
     $stmt = $this->conection->prepare($query);
     $stmt->execute([$id]);
-    $stmt->setFetchMode(PDO::FETCH_CLASS, User::class);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, User::class); 
     return $stmt->fetch();
    }
 
     public function create() {
         $sql = "INSERT INTO users
-            (`firstname`, `lastname`,`email`,`passsword`,`role`)
-            VALUES (?, ?,?,?,?)";
+            (`firstname`, `lastname`,`email`,`password`,`role`)
+            VALUES (?,?,?,?,?)";
         $stmt = $this->conection->prepare($sql);
         $stmt->execute([$this->firstname, $this->lastname, $this->email,$this->password,$this->role]);
 

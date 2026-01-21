@@ -13,7 +13,7 @@ class Order {
     public function __construct()
     {
         
-        $this->conection = Database::getinstance()->getConn();
+        $this->conection = Database::getConn();
      }
 
     public function getId(){

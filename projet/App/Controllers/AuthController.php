@@ -20,28 +20,28 @@ class AuthController{
         header("Location:\login"); 
     }
 
-  public function login() {
-     Session::start();
+  public function login()
+{
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
+
     $usermod = new User();
     $user = $usermod->getUser($email);
 
-    if ($user && $password == $user->getPassword()) {
-         Session::setSession('firstname', $user->getFirstname());
-         Session::remove('error');
+    if ($user && $user->getPassword() && $password == $user->getPassword()) {
+
+
         if ($user->getRole() === 'admin') {
             header("Location: /admin");
         } else {
-            header("Location: /user");
+            header("Location: /client");
         }
-    } else {
-        Session::setSession('error', "Email or password is incorrect");
-        header("Location: /login");
-     }
-
+        exit;
+    }
+    header("Location: /login");
+    exit;
 }
+
 
 public function logout(){
     Session::start();

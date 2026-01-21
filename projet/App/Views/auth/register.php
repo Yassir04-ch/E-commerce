@@ -25,11 +25,11 @@
             <form action="/register" method="POST" class="grid md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-500 uppercase">First Name</label>
-                    <input type="text" name="fname" required class="w-full px-4 py-3 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 transition-all">
+                    <input type="text" name="firstname" required class="w-full px-4 py-3 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 transition-all">
                 </div>
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-500 uppercase">Last Name</label>
-                    <input type="text" name="lname" required class="w-full px-4 py-3 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 transition-all">
+                    <input type="text" name="lastname" required class="w-full px-4 py-3 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 transition-all">
                 </div>
                 <div class="md:col-span-2 space-y-2">
                     <label class="text-xs font-bold text-slate-500 uppercase">Email Address</label>
@@ -38,11 +38,10 @@
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-500 uppercase">Password</label>
                     <input type="password" name="password" required class="w-full px-4 py-3 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 transition-all">
-                </div>
-                <div class="space-y-2">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Confirm Password</label>
-                    <input type="password" name="confirm_password" required class="w-full px-4 py-3 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 transition-all">
-                </div>
+                    <input type="hidden" name="role" value="client" >
+             </div>
+                
+                   
                 <div class="md:col-span-2 pt-4">
                     <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all">
                         Create Account
