@@ -58,6 +58,7 @@
                         <option value="" class="bg-[#1e293b]">-- Sélectionner --</option>
                         <option value="Ordinateurs" class="bg-[#1e293b]">Ordinateurs</option>
                         <option value="Smartphones" class="bg-[#1e293b]">Smartphones</option>
+                        <option value="Smartphones" class="bg-[#1e293b]">earphones</option>
                     </select>
                 </div>
 

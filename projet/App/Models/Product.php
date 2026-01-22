@@ -90,18 +90,15 @@ class Product {
     {
         $sql = "INSERT INTO products (name, description, price, stock, image, category_id)
                 VALUES (?, ?, ?, ?, ?, ?)";
-
+                
         $stmt = $this->conection->prepare($sql);
          $stmt->execute([$this->name,$this->description,$this->price,
          $this->stock,$this->image,$this->category->getId()]);
     }
 
     public function getAllProduct(){
-    $sql = "SELECT p.id, p.name, p.description, p.price, p.stock, p.image,
-            c.id as category_id, c.name as category_name
-            FROM products p
-            JOIN category c ON p.category_id = c.id";
-    $stmt = $this->conection->prepare($sql);
+    $sql = "SELECT name,description,id,image,stock,price FROM products";
+     $stmt = $this->conection->prepare($sql);
     $stmt->execute();
     $stmt->setFetchMode(PDO::FETCH_CLASS,Product::class);
     return $stmt->fetchAll();
@@ -109,16 +106,24 @@ class Product {
 
     public function updatePdoduct()
     {
-        $sql = "UPDATE products SET name = ?, description = ?, price = ?, stock = ?, image = ?, category_id= ? WHERE id=?";
+        $sql = "UPDATE products SET name = ?, description = ?, price = ?, stock = ?, image = ? WHERE id=?";
          $stmt = $this->conection->prepare($sql);
-         $stmt->execute([$product->getName(),$product->getDescription(),$product->getPrice(),
-           $product->getStock(),$product->getImage(),$product->category()->getId()]);
+         $stmt->execute([$this->name,$this->description,$this->price,$this->stock,$this->image , $this->getId()]);
     }
 
-    public function delete(int $id)
+    public function deletepro(int $id)
     {
-        $stmt = $this->conection->prepare("DELETE FROM products WHERE id=?");
+        $sql = "DELETE FROM products WHERE id=?";
+        $stmt = $this->conection->prepare($sql);
         return $stmt->execute([$id]);
+    }
+
+    public function geproductbyid($id){
+    $sql = "SELECT name,description,id,image,stock,price FROM products WHERE id = ?";
+    $stmt = $this->conection->prepare($sql);
+    $stmt->execute([$id]);
+    $stmt->setFetchMode(PDO::FETCH_CLASS,Product::class);
+    return $stmt->fetch();
     }
 
 

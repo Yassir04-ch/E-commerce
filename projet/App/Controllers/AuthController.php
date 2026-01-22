@@ -10,13 +10,13 @@ class AuthController{
        }
 
     public function create(){
-        $user = new User();
-        $user->setFirstname($_POST['firstname']);
-        $user->setLastname($_POST['lastname']);
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setRole($_POST['role']);
-        $user->create();
+        $Client = new Client();
+        $Client->setFirstname($_POST['firstname']);
+        $Client->setLastname($_POST['lastname']);
+        $Client->setEmail($_POST['email']);
+        $Client->setPassword($_POST['password']);
+        $Client->setRole($_POST['role']);
+        $Client->create();
         header("Location:\login"); 
     }
 
@@ -29,7 +29,8 @@ class AuthController{
     $user = $usermod->getUser($email);
 
     if ($user && $user->getPassword() && $password == $user->getPassword()) {
-
+        session_start();
+       $_SESSION['role'] = $user->getRole();
 
         if ($user->getRole() === 'admin') {
             header("Location: /admin");

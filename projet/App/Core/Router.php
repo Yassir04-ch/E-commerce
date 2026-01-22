@@ -22,19 +22,40 @@ class Router
                 break;
                  case '/dach':
                 require __DIR__ . "/../Views/back/Dashboard.php";
-                break; case '/category':
-                require __DIR__ . "/../Views/front/Categorie.php";
-                break; case '/product':
+                break;
+                case '/category':
+                $controller = new FrontController();
+                $controller->index();
+                
+                break;
+                 case '/product':
                 require __DIR__ . "/../Views/front/Product.php";
+                break;
             case '/admin':
                 $controller = new AdminController();
                 $controller->index('admin');
                 break;
-                 case '/add':
+            case '/deleteProduct':
                 $controller = new AdminController();
-                $controller->index('addproduct');
+                  $controller->deletproduct();
+                break;
+            case '/updatepro':
+                   $controller = new AdminController();
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $controller->addproduct();
+                
+                   $controller->updatePdoduct();
+                 }
+                 else{
+                   $controller->index('updatepro');
+                 }
+                break;
+               case '/add':
+                $controller = new AdminController();
+
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $controller->addproduct(); 
+                } else {
+                    $controller->index('addproduct');
                 }
                 break;
 

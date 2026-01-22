@@ -7,8 +7,8 @@ use App\Models\Product;
 class FrontController{
     public function index(){
      $product = new Product();
-      $products = $product->getAllProduct();
-      var_dump($products);
-       require __DIR__ . "/../Views/front/Categorie.php";
+     $products = $product->getAllProduct();
+    session_start();
+    require __DIR__ . "/../Views/front/Categorie.php";
    }
 }

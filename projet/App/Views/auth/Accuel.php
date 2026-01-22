@@ -12,12 +12,12 @@
         <div class="text-2xl font-black tracking-tighter italic text-blue-600">ELECTROPRO</div>
         <div class="hidden md:flex space-x-10 font-bold text-sm uppercase tracking-widest text-slate-600">
             <a href="#" class="text-blue-600">Home</a>
-            <a href="catalog.html" class="hover:text-blue-600">Shop</a>
+            <a href="/category" class="hover:text-blue-600">Shop</a>
             <a href="#" class="hover:text-blue-600">Deals</a>
         </div>
         <div class="flex items-center space-x-6 text-xl">
             <a href="#"><i class="fas fa-search"></i></a>
-            <a href="cart.html" class="relative"><i class="fas fa-shopping-bag"></i></a>
+            <a href="/cart" class="relative"><i class="fas fa-shopping-bag"></i></a>
             <a href="/login" class="bg-slate-900 text-white text-sm px-6 py-2 rounded-full font-bold">Login</a>
         </div>
     </nav>
@@ -35,22 +35,9 @@
             </div>
             <div class="relative">
                 <div class="absolute -top-20 -right-20 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800" class="rounded-3xl shadow-2xl relative z-10" alt="Tech">
+                <img src="https://img.freepik.com/premium-photo/tech-gadgets-devices12-58_1288896-13149.jpg?semt=ais_hybrid&w=740&q=80" class="rounded-3xl shadow-2xl relative z-10" alt="Tech">
             </div>
         </div>
-    </section>
-
-    <section class="py-20 container mx-auto px-8">
-        <h2 class="text-3xl font-bold mb-12">Top Categories</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="group relative h-64 bg-slate-900 rounded-3xl overflow-hidden cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1542491595-3395255c5811?auto=format&fit=crop&q=80&w=500" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-500">
-                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                    <h3 class="text-2xl font-bold">Accessories</h3>
-                    <p class="text-sm opacity-80">Enhance your tech</p>
-                </div>
-            </div>
-            </div>
     </section>
 </body>
 </html>
