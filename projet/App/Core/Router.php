@@ -35,6 +35,10 @@ class Router
                 $controller = new AdminController();
                 $controller->index('admin');
                 break;
+            case '/users':
+                $controller = new AdminController();
+                $controller->index('users');
+                break;
             case '/deleteProduct':
                 $controller = new AdminController();
                   $controller->deletproduct();
@@ -58,8 +62,18 @@ class Router
                     $controller->index('addproduct');
                 }
                 break;
+                case '/addcart':
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $controller = new FrontController();
+                        $controller->addToCart();
+                    }
+               break;
+               case '/card':
+                $controller = new FrontController();
+                $controller->cart();
+                break;
 
-            case '/register':
+               case '/register':
                 $controller = new AuthController();
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $controller->create();
@@ -80,19 +94,20 @@ class Router
                 $controller->logout();
                 break;
 
-            case '/delete':
+            case '/deleteuser':
                 $controller = new AdminController();
-                $controller->delete();
+                $controller->deleteuser();
                 break;
 
-            case '/update':
+            case '/updateuser':
                 $controller = new AdminController();
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $controller->update();
+                    $controller->updateuser();
                 } else {
-                    $controller->index('update');
+                    $controller->index('updateuser');
                 }
                 break;
+                
 
             case '/client':
                 $controller = new FrontController();

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElectroPro - Premium Electronics</title>
+    <title>YASSIR-TECH - Premium Electronics</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="bg-white font-sans text-slate-900">
     <nav class="flex justify-between items-center px-8 py-6 sticky top-0 bg-white/80 backdrop-blur-md z-50">
-        <div class="text-2xl font-black tracking-tighter italic text-blue-600">ELECTROPRO</div>
+        <div class="text-2xl font-black tracking-tighter italic text-blue-600">YASSIR-TECH</div>
         <div class="hidden md:flex space-x-10 font-bold text-sm uppercase tracking-widest text-slate-600">
             <a href="#" class="text-blue-600">Home</a>
             <a href="/category" class="hover:text-blue-600">Shop</a>

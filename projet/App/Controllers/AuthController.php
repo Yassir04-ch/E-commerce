@@ -24,6 +24,7 @@ class AuthController{
 {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    
 
     $usermod = new User();
     $user = $usermod->getUser($email);

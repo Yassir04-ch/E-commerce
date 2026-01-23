@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Core\Session;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 
 class AdminController{
     public function index($view){
@@ -18,6 +19,14 @@ class AdminController{
         break;
         case 'addproduct':
         require __DIR__ . "/../Views/back/addproduct.php";
+        break;
+        case 'updateuser':
+        require __DIR__ . "/../Views/back/updateuser.php";
+        break;
+        case 'users':
+        $user = new User();
+        $users = $user->findAll();
+        require __DIR__ . "/../Views/back/users.php";
         break;
        }
     }

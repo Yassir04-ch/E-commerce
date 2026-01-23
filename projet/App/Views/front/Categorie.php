@@ -19,18 +19,22 @@
 
 <nav class="bg-black/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" class="text-2xl font-black tracking-tighter text-white italic">
-            ELECTRO<span class="text-blue-500 underline decoration-blue-500 underline-offset-4">PRO</span>
+        <a href="/category" class="text-2xl font-black tracking-tighter text-white italic">
+            YASSIR<span class="text-blue-500 underline decoration-blue-500 underline-offset-4">-TECH</span>
         </a>
+
         <div class="flex items-center space-x-6">
-            <?php if(isset($_SESSION['user'])): ?>
-                <a href="logout.php" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Logout</a>
-            <?php else: ?>
-                <a href="login.php" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Login</a>
-            <?php endif; ?>
+            <a href="/card" class="relative text-white hover:text-blue-400 transition">
+                <i class="fas fa-shopping-cart text-xl"></i>
+            </a>
+
+           
+                <a href="/logout" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Logout</a>
+                <a href="/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Login</a>
         </div>
     </div>
 </nav>
+
 
 <main class="container mx-auto px-6 py-16">
     <div class="flex justify-between mb-6">
@@ -70,7 +74,7 @@
                             <span class="text-white font-black"><?= number_format($product->getPrice(),2) ?> DH</span>
                             <span class="text-slate-400 text-xs">Stock: <?= (int)$product->getStock() ?></span>
                         </div>
-                        <form action="/add-to-cart" method="POST">
+                        <form action="/addcart" method="POST">
                             <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
                             <button 
                                 type="submit"

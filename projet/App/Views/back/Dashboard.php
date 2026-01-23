@@ -16,7 +16,7 @@
     <div class="flex min-h-screen">
         <aside class="w-72 bg-slate-900 text-white shadow-xl fixed h-full transition-all duration-300">
             <div class="p-8">
-                <h1 class="text-2xl font-black tracking-tighter italic">ELECTRO<span class="text-blue-500">PRO</span></h1>
+                <h1 class="text-2xl font-black tracking-tighter italic">YASSIR<span class="text-blue-500">-TECH</span></h1>
                 <p class="text-slate-400 text-[10px] uppercase font-bold mt-1 tracking-widest">Admin Control Center</p>
             </div>
 
