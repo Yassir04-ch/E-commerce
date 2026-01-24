@@ -25,17 +25,28 @@
                 </div>
 
                 <form action="/updateuser" method="POST" class="space-y-6">
-                    <input type="hidden" name="user_id" value="1">
+                    <input type="hidden" name="id" value="<?=$user->getId() ?>">
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Nom Complet</label>
-                        <input type="text" name="fullname" value="" 
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Firstname</label>
+                        <input type="text" name="firstname" value="<?=$user->getFirstname() ?>" 
+                            class="w-full px-5 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-white placeholder-slate-500">
+                    </div>
+
+                      <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Lastname</label>
+                        <input type="text" name="lastname" value="<?=$user->getLastname()?>" 
                             class="w-full px-5 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-white placeholder-slate-500">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Adresse Email</label>
-                        <input type="email" name="email" value=""
+                        <input type="email" name="email" value="<?=$user->getEmail() ?>"
+                            class="w-full px-5 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-white">
+                    </div>
+                      <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 ml-1">Adresse Email</label>
+                        <input type="password" name="password" value="<?=$user->getPassword() ?>"
                             class="w-full px-5 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-white">
                     </div>
 
@@ -45,7 +56,7 @@
                             <div class="relative">
                                 <select name="role" class="w-full px-5 py-4 bg-slate-800/50 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all appearance-none cursor-pointer text-white font-medium">
                                     <option value="admin" class="bg-slate-900">Administrateur</option>
-                                    <option value="user" class="bg-slate-900">Utilisateur Standard</option>
+                                    <option value="client" class="bg-slate-900">Client</option>
                                 </select>
                                 <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-500">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>

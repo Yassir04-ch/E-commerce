@@ -1,16 +1,27 @@
 <?php
-namespace Models;
+namespace App\Models;
+use  App\Core\Database;
+use  App\Core\Order;
+use  App\Core\Product;
+
+use PDO;
 
 class OrderItem {
     private int $id;
     private Product $product;
     private int $quantity;
     private float $price;
+    private Order $order;
+    private PDO $conection;
 
-    public function __construct(Product $product, int $quantity) {
-        $this->product = $product;
-        $this->quantity = $quantity;
-    }
+    
+    public function __construct()
+    {
+        
+        $this->conection = Database::getConn();
+     } 
+
+   
     public function getId(){
         return $this->id;
     }
@@ -30,9 +41,27 @@ class OrderItem {
         $this->quantity = $quantity;
     }
     public function getPrice(){
-        return $this->price;;
+        return $this->price;
     }
-    public function setPrice($price){
-       $this->price = $price;
+    public function setPrice(Product $product){
+       $this->price = $product->getPrice();
+    }
+    public function getOrder(){
+     return  $this->order;
+    }
+
+    public function setOrder(Order $order){
+       $this->order = $order;
+    }
+    
+    public function save(): void {
+        $sql = "INSERT INTO order_item (order_id, product_id, quantity, price)
+                VALUES (?, ?, ?, ?)";
+        $stmt = $this->conection->prepare($sql);
+        $stmt->execute([$this->order->getId(),
+            $this->product->getId(),
+            $this->quantity,
+            $this->price
+        ]);
     }
 }

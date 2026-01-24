@@ -117,14 +117,15 @@ class Product {
         $stmt = $this->conection->prepare($sql);
         return $stmt->execute([$id]);
     }
-
-    public function geproductbyid($id){
+   
+    public function findpro($id)
+   {
     $sql = "SELECT name,description,id,image,stock,price FROM products WHERE id = ?";
     $stmt = $this->conection->prepare($sql);
     $stmt->execute([$id]);
-    $stmt->setFetchMode(PDO::FETCH_CLASS,Product::class);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, Product::class);
     return $stmt->fetch();
-    }
+  }
 
 
 }

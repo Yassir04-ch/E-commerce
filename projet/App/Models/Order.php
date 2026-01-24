@@ -1,5 +1,7 @@
 <?php
 namespace App\Models;
+use  App\Core\Database;
+use PDO;
 
 class Order {
     private int $id;
@@ -19,7 +21,7 @@ class Order {
     public function getId(){
         return $this->id;
     }
-    public function setId(){
+    public function setId($id){
         $this->id = $id;
     }
     public function getClient(){
@@ -37,9 +39,10 @@ class Order {
     }
 
     public function addOrder(){
-      $sql = "INSERT INTO ordes (client_id,orderItems_id,status) VALUES (?,?,?,)";
+      $sql = "INSERT INTO ordes (client_id,status) VALUES (?,?,?)";
       $stmt = $this->conection->prepare($sql);
-      $stmt->execute([$this->client->getId()],$this->status);
+      $stmt->execute([$this->client->getId(),$this->status]);
     }
+    
 
 }

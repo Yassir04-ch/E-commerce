@@ -21,6 +21,9 @@ class AdminController{
         require __DIR__ . "/../Views/back/addproduct.php";
         break;
         case 'updateuser':
+        $id = $_GET['id'];
+        $userMod = new User();
+        $user = $userMod->getUserbyid($id); 
         require __DIR__ . "/../Views/back/updateuser.php";
         break;
         case 'users':
@@ -52,7 +55,7 @@ class AdminController{
     $Product->setCategory($categoriee);             
     $Product->addProduct();
     header("Location:/category"); 
-     exit;
+    
     }
 
     public function updatePdoduct(){
@@ -73,7 +76,25 @@ class AdminController{
        $Product->deletepro( $id);
         header("Location:/category"); 
     }
+   public function updateuser(){
+       $user = new User();
+       $user->setId($_POST['id']);
+       $user->setFirstname($_POST['firstname']);
+       $user->setLastname( $_POST['lastname']);
+       $user->setEmail( $_POST['email']);
+       $user->setRole( $_POST['role']);
+       $user->setPassword( $_POST['password']);
+       $users = $user->updateuser();
+       header("location:/users");
 
+   }
+   public function deleteuser(){
+    $id = $_GET['id'];
+    $user = new User();
+    $user->deletuser($id);
+    header("Location:/users"); 
+
+   }
 
 
 }

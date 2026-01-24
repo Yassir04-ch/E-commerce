@@ -32,6 +32,7 @@ class AuthController{
     if ($user && $user->getPassword() && $password == $user->getPassword()) {
         session_start();
        $_SESSION['role'] = $user->getRole();
+       $_SESSION['id'] = $user->getId();
 
         if ($user->getRole() === 'admin') {
             header("Location: /admin");
@@ -46,11 +47,9 @@ class AuthController{
 
 
 public function logout(){
-    Session::start();
-    Session::destroy();
-    header("Location: /login");
+    session_start();
+    session_destroy();
+    header("Location: /accueil");
 }
 
-
-    
 }

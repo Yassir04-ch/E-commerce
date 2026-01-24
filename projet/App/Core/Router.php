@@ -3,6 +3,7 @@ namespace App\Core;
 use App\Controllers\AdminController;
 use App\Controllers\AuthController;
 use App\Controllers\FrontController;
+use App\Controllers\CartController;
 
 class Router
 {
@@ -35,10 +36,6 @@ class Router
                 $controller = new AdminController();
                 $controller->index('admin');
                 break;
-            case '/users':
-                $controller = new AdminController();
-                $controller->index('users');
-                break;
             case '/deleteProduct':
                 $controller = new AdminController();
                   $controller->deletproduct();
@@ -53,7 +50,7 @@ class Router
                    $controller->index('updatepro');
                  }
                 break;
-               case '/add':
+            case '/add':
                 $controller = new AdminController();
 
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -62,16 +59,25 @@ class Router
                     $controller->index('addproduct');
                 }
                 break;
-                case '/addcart':
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        $controller = new FrontController();
-                        $controller->addToCart();
-                    }
-               break;
-               case '/card':
+           
+            break;
+
+            case '/card':
                 $controller = new FrontController();
-                $controller->cart();
+                $controller->index();
                 break;
+
+          
+
+                case '/checkout':
+                    $controller = new FrontController();
+                    $controller->checkout();
+                    break;
+
+                case '/orders':
+                    $controller = new FrontController();
+                    $controller->orders();
+                    break;
 
                case '/register':
                 $controller = new AuthController();
@@ -94,20 +100,19 @@ class Router
                 $controller->logout();
                 break;
 
-            case '/deleteuser':
+            case '/delete':
                 $controller = new AdminController();
-                $controller->deleteuser();
+                $controller->delete();
                 break;
 
-            case '/updateuser':
+            case '/update':
                 $controller = new AdminController();
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $controller->updateuser();
+                    $controller->update();
                 } else {
-                    $controller->index('updateuser');
+                    $controller->index('update');
                 }
                 break;
-                
 
             case '/client':
                 $controller = new FrontController();

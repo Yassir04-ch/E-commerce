@@ -5,112 +5,116 @@
     <title>Your Cart | ElectroPro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #05070a; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .product-thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; }
+        .glass-table { background: rgba(15, 18, 25, 0.6); backdrop-filter: blur(10px); }
+    </style>
 </head>
 
-<body class="bg-slate-900 text-slate-200 min-h-screen">
+<body class="bg-[#05070a] text-slate-300 min-h-screen">
 
-<nav class="bg-black/80 border-b border-white/10">
+<nav class="border-b border-white/5 bg-black/40 backdrop-blur-md sticky top-0 z-50">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="/category" class="text-2xl font-black text-white italic">
-            YASSIR<span class="text-blue-500">-TECH</span>
+        <a href="/category" class="text-xl font-black text-white tracking-tighter">
+            YASSIR<span class="text-blue-500">.</span>TECH
         </a>
-        <a href="/category" class="text-sm text-slate-400 hover:text-white">
-            ← Continue shopping
+        <a href="/category" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white transition">
+            <i class="fas fa-arrow-left mr-2"></i> Back to Store
         </a>
     </div>
 </nav>
 
-<main class="container mx-auto px-6 py-16">
+<main class="container mx-auto px-6 py-12 max-w-5xl">
+    <div class="flex items-center gap-4 mb-10">
+        <div class="w-12 h-12 bg-blue-600/10 rounded-2xl flex items-center justify-center text-blue-500">
+            <i class="fas fa-shopping-cart text-xl"></i>
+        </div>
+        <h1 class="text-3xl font-extrabold text-white tracking-tight">Your Cart</h1>
+    </div>
 
-    <h1 class="text-3xl font-black mb-10 text-white">🛒 Your Cart</h1>
+    <div class="glass-table rounded-[2rem] border border-white/5 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 border-b border-white/5">
+                    <th class="p-6">Product Details</th>
+                    <th class="p-6 text-center">Price</th>
+                    <th class="p-6 text-center">Quantity</th>
+                    <th class="p-6 text-right">Subtotal</th>
+                    <th class="p-6 text-center"></th>
+                </tr>
+            </thead>
+           <tbody class="divide-y divide-white/5">
 
-    <?php if (empty($products)): ?>
-        <div class="bg-black/60 p-10 rounded-2xl text-center border border-white/10">
-            <p class="text-slate-400 text-lg mb-6">Your cart is empty</p>
-            <a href="/category"
-               class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl font-bold transition">
-                Go Shopping
+<?php if(!empty($productsInCart)): ?>
+    <?php foreach($productsInCart as $item): ?>
+        <tr class="group hover:bg-white/[0.02] transition">
+            <td class="p-6">
+                <div class="flex items-center gap-4">
+                    <img src="<?= $item['product']->getImage() ?>" class="product-thumb border border-white/10" alt="Product">
+                    <div>
+                        <p class="text-white font-bold text-sm"><?= $item['product']->getName() ?></p>
+                        <p class="text-[11px] text-slate-500"><?= $item['product']->getDescription() ?></p>
+                    </div>
+                </div>
+            </td>
+
+            <td class="p-6 text-center font-semibold text-slate-400 text-sm">
+                <?= number_format($item['product']->getPrice(), 0) ?> DH
+            </td>
+
+            <td class="p-6">
+                <form action="/update-cart" method="POST" class="flex items-center justify-center gap-3">
+                    <input type="hidden" name="product_id" value="<?= $item['product']->getId() ?>">
+
+                    <div class="flex items-center bg-black/40 border border-white/10 rounded-xl p-1">
+                        <input type="number" name="qty[<?= $item['product']->getId() ?>]" value="<?= $item['qty'] ?>"
+                               min="1"
+                               class="w-14 bg-transparent text-center text-sm font-bold text-white outline-none">
+                    </div>
+                </form>
+            </td>
+
+            <td class="p-6 text-right font-black text-white text-sm">
+                <?= number_format($item['subtotal'], 0) ?> DH
+            </td>
+
+            <td class="p-6 text-center">
+                <form action="/delete-cart" method="POST">
+                    <input type="hidden" name="product_id" value="<?= $item['product']->getId() ?>">
+                    <button type="submit" class="text-slate-600 hover:text-red-500 transition-colors">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="5" class="text-center py-10 text-sm text-slate-400">
+            Your cart is empty.
+        </td>
+    </tr>
+<?php endif; ?>
+
+</tbody>
+
+    </div>
+
+
+        <div class="flex flex-col gap-4 w-full md:w-auto">
+            <a href="/checkout" class="bg-white text-black hover:bg-blue-600 hover:text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest transition-all text-center shadow-2xl shadow-white/5">
+                Proceed to Checkout <i class="fas fa-chevron-right ml-2 text-[10px]"></i>
             </a>
+            <p class="text-[10px] text-slate-600 text-center italic font-medium">Secure SSL Encrypted Checkout</p>
         </div>
-    <?php else: ?>
-
-        <div class="overflow-x-auto bg-black/60 rounded-2xl border border-white/10">
-            <table class="w-full text-left">
-                <thead class="bg-slate-800 text-slate-400 text-sm uppercase">
-                    <tr>
-                        <th class="p-4">Product</th>
-                        <th class="p-4">Price</th>
-                        <th class="p-4">Quantity</th>
-                        <th class="p-4">Subtotal</th>
-                        <th class="p-4">Action</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                <?php foreach ($products as $p): ?>
-                    <tr class="border-t border-white/5 hover:bg-white/5 transition">
-                        <td class="p-4 font-bold text-white">
-                            <?= htmlspecialchars($p->getName()) ?>
-                        </td>
-
-                        <td class="p-4">
-                            <?= number_format($p->getPrice(), 2) ?> DH
-                        </td>
-
-                        <td class="p-4">
-                            <form action="/update-cart" method="POST" class="flex items-center gap-2">
-                                <input type="hidden" name="product_id" value="<?= $p->getId() ?>">
-                                <input
-                                    type="number"
-                                    name="quantity"
-                                    min="1"
-                                    value="<?= $p->quantity ?>"
-                                    class="w-20 px-2 py-1 bg-slate-800 rounded outline-none focus:ring-2 focus:ring-blue-500"
-                                >
-                                <button
-                                    type="submit"
-                                    class="text-xs bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded font-bold">
-                                    Update
-                                </button>
-                            </form>
-                        </td>
-
-                        <td class="p-4 font-bold text-white">
-                            <?= number_format($p->subtotal, 2) ?> DH
-                        </td>
-
-                        <td class="p-4">
-                            <a href="/delete-cart?id=<?= $p->getId() ?>"
-                               onclick="return confirm('Remove this product from cart?')"
-                               class="text-red-500 hover:text-red-400 font-bold">
-                                ❌ Remove
-                            </a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="flex flex-col md:flex-row justify-between items-center mt-10 gap-6">
-            <h2 class="text-2xl font-black text-white">
-                Total: <span class="text-blue-500"><?= number_format($total, 2) ?> DH</span>
-            </h2>
-
-            <a href="/checkout"
-               class="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-xl font-black uppercase tracking-widest transition">
-                Checkout
-            </a>
-        </div>
-
-    <?php endif; ?>
-
+    </div>
 </main>
 
-<footer class="bg-black py-8 border-t border-white/10 text-center mt-20">
-    <p class="text-slate-600 text-xs font-bold uppercase tracking-widest italic">
-        ElectroPro © 2026
-    </p>
+<footer class="py-10 text-center opacity-40">
+    <p class="text-[10px] font-bold uppercase tracking-[0.4em]">ElectroPro Premium Series 2026</p>
 </footer>
 
 </body>
