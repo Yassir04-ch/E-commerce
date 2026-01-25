@@ -44,7 +44,7 @@
                 <i class="fas fa-shopping-cart"></i>
                 <span class="absolute -top-2 -right-2 bg-blue-600 text-[9px] w-3.5 h-3.5 flex items-center justify-center rounded-full text-white">3</span>
             </a>
-            <?php if(isset($_SESSION['role'])): ?>
+            <?php if(isset($_SESSION['id'])): ?>
                 <a href="/logout" class="text-[10px] font-bold uppercase tracking-wider hover:text-red-500">Exit</a>
             <?php else: ?>
                 <a href="/login" class="text-[10px] font-bold uppercase tracking-wider text-white">Sign In</a>
@@ -57,6 +57,9 @@
     <div class="flex items-center justify-between mb-8">
         <h1 class="text-2xl font-bold text-white">Recent Tech</h1>
         <?php if(isset($_SESSION['role']) && $_SESSION['role'] == "admin"): ?>
+              <a href="/admin" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white transition">
+               <i class="fas fa-arrow-left mr-2"></i> Back to Store
+              </a>
             <a href="/add" class="text-[10px] bg-blue-600/10 text-blue-500 border border-blue-500/20 px-4 py-1.5 rounded-md font-bold uppercase hover:bg-blue-600 hover:text-white transition">Add</a>
         <?php endif; ?>
     </div>

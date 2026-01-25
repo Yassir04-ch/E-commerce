@@ -36,6 +36,22 @@ class Router
                 $controller = new AdminController();
                 $controller->index('admin');
                 break;
+            case '/users':
+                $controller = new AdminController();
+                $controller->index('users');
+                break;
+            case '/updateuser':
+                 $controller = new AdminController();
+                if($_SERVER['REQUEST_METHOD']==='GET'){
+                   $controller->index('updateuser');
+                }else{
+                  $controller->updateuser();
+                }
+            break;
+             case '/deleteuser':
+                $controller = new AdminController();
+                  $controller->deleteuser();
+            break;
             case '/deleteProduct':
                 $controller = new AdminController();
                   $controller->deletproduct();

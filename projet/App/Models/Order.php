@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Models\OrderItem;
 use  App\Core\Database;
 use PDO;
 
@@ -63,17 +64,19 @@ class Order {
     }
     
     public function getAllorder(){
-        $sql = "SELECT * FROM orders";
+        $sql = "SELECT status,created_at,id FROM orders";
         $stmt = $this->conection->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS,Order::class);
-         return $stmt->fetch();
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public function getorderitme(){
-        $sql = "SELECT * FROM order_item WHERE order_id = ?";
+        $sql = "SELECT id,price,quantity FROM order_item WHERE order_id = ?";
         $stmt = $this->conection->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS,OrderItem::class);
         $stmt->execute([$this->id]);
-        return $stmt->fetch();
+        $this->orderItems = $stmt->fetchAll();
+        return $this->orderItems;
     }
 }

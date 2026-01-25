@@ -7,12 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#0f172a] text-slate-200 font-sans p-10">
-
+    
     <div class="max-w-4xl mx-auto">
         
         <h1 class="text-3xl font-bold text-violet-400 mb-8 border-b-2 border-slate-800 pb-4 flex items-center gap-3">
             <span>📊</span> Gestion des Commandes
         </h1>
+          <a href="/category" class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white transition">
+            <i class="fas fa-arrow-left mr-2"></i> Back to Store
+        </a>
 
         <?php if (empty($orders)): ?>
             <div class="text-center p-10 bg-slate-800 rounded-xl text-slate-400">
@@ -26,7 +29,7 @@
                     <div class="bg-[#312e81] p-6 flex justify-between items-center">
                         <div>
                             <div class="text-xs font-black text-violet-300 tracking-widest uppercase">Commande #<?= $order->getId() ?></div>
-                            <div class="text-xl font-bold text-white mt-1">Client ID: <?= $order->getClient_id() ?></div>
+                            <div class="text-xl font-bold text-white mt-1">Client ID:</div>
                         </div>
                         <div class="text-right">
                            
@@ -48,14 +51,18 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-800">
-                    
+                                <?php 
+                                    $totalOrder =0;
+                                    foreach ($order->getOrderitems() as $item): 
+                                        $subtotal = $item->getPrice() * $item->getQuantity();
+                                        $totalOrder += $subtotal;   
+                                ?>
                                 <tr class="group hover:bg-slate-800/50 transition">
                                     <td class="py-4 px-2">
-                                        <span class="text-slate-200 font-medium">Produit<?= $item->getProduct_id() ?></span>
                                     </td>
                                     <td class="py-4 px-2 text-center text-slate-400"><?= $item->getQuantity() ?></td>
-                                    <td class="py-4 px-2 text-right text-slate-500"><?= number_format($item->getPrice(), 2) ?> DH</td>
-                                    <td class="py-4 px-2 text-right font-bold text-slate-100"><?= number_format($subtotal, 2) ?> DH</td>
+                                    <td class="py-4 px-2 text-right text-slate-500"><?= $item->getPrice()?> DH</td>
+                                    <td class="py-4 px-2 text-right font-bold text-slate-100"><?= $subtotal ?> DH</td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -69,11 +76,12 @@
                         <div class="text-right">
                             <span class="text-xs text-slate-500 block">Total Final</span>
                             <span class="text-2xl font-black text-emerald-400 tracking-tight">
-                                <?= number_format($totalOrder, 2) ?> <small class="text-xs">DH</small>
+                                <?= $totalOrder?> <small class="text-xs">DH</small>
                             </span>
                         </div>
                     </div>
                 </div>
+            <?php endforeach; ?>
 
         <?php endif; ?>
     </div>

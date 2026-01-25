@@ -35,8 +35,12 @@ class AdminController{
         break;
         case 'order':
          $order = new Order();
-         $ordrs =  $order->getAllorder();
-         $ordersitem = $order->getAllorder();
+         $orders =  $order->getAllorder();
+         if ($orders) {
+          foreach ($orders as $order) {
+           $order->getorderitme();
+         }
+         }  
         require __DIR__ . "/../Views/back/order.php";
         break;
        }
@@ -56,7 +60,7 @@ class AdminController{
 
     $Product = new Product();
     $Product->setName($_POST['name']);
-    $Product->setDescription($_POST['description']);  
+    $Product->setDescription(password_hash($_POST['description'],PASSWORD_DEFAULT));  
     $Product->setPrice($_POST['price']);              
     $Product->setStock($_POST['stock']);
     $Product->setImage($_POST['image']);
