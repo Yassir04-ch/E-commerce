@@ -98,7 +98,6 @@
                             
                           <form action="/addcart" method="POST" class="flex items-center gap-2">
                                 <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
-
                                 <input type="number"  name="quantity" value="1" min="1"
                                     class="w-20 h-9 rounded-lg px-3 text-black font-semibold border border-white/20 focus:outline-none focus:border-blue-500 transition" />
                                 <button type="submit"

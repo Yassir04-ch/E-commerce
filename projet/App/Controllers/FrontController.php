@@ -12,6 +12,64 @@ class FrontController{
     require __DIR__ . "/../Views/front/Categorie.php";
    }
 
-   
+  public function addToCart()
+    {
+        session_start();
+        
+        $productId = $_POST['product_id'] ;
+        $quantity  = $_POST['quantity'] ;
+
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+
+      if(isset($_SESSION['cart'][$productId])){
+        $_SESSION['cart'][$productId] += $quantity ;
+      }
+      else{
+        $_SESSION['cart'][$productId] = $quantity;
+      }
+
+        header("Location: /category");
+    }
+    
+    public function cart()
+    {
+        session_start();
+
+        $cart = $_SESSION['cart'];
+        $productsCart = [];
+        $productmod = new Product();
+        
+        foreach ($cart as $productId => $qty) {
+            $product = $productmod->findpro($productId);
+            if($product){
+                $subtotal = $product->getPrice() * $qty;
+                $productsCart []= [
+                    'product'=>$product,
+                    'qty'=>$qty,
+                    'subtotal'=>$subtotal
+                ];
+            }
+        }
+     
+
+        require __DIR__ . "/../Views/front/card.php";
+    }
+
+
+    public function deleteCart()
+    {
+        session_start();
+
+        $productId = $_POST['product_id'];
+
+        if (isset($_SESSION['cart'][$productId])) {
+            unset($_SESSION['cart'][$productId]);
+        }
+
+        header("Location: /card");
+        exit;
+    }
 
 }

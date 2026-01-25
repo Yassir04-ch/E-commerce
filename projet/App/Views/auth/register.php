@@ -38,7 +38,6 @@
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-500 uppercase">Password</label>
                     <input type="password" name="password" required class="w-full px-4 py-3 bg-slate-50 border rounded-xl outline-none focus:border-blue-500 transition-all">
-                    <input type="hidden" name="role" value="client" >
              </div>
                 
                    

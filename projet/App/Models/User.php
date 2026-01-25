@@ -4,14 +4,14 @@ use  App\Core\Database;
 use PDO;
 
 class User{
-    private int $id;
-    private string $firstname;
-    private string $lastname;
-    private string $email;
-    private string $password;
-    private string $role;
+    protected int $id;
+    protected string $firstname;
+    protected string $lastname;
+    protected string $email;
+    protected string $password;
+    protected string $role;
  
-    private PDO $conection;
+    protected PDO $conection;
 
 
     public function __construct()
@@ -121,19 +121,19 @@ class User{
 
         $this->id = $this->conection->lastInsertId();
     }
- public function deletuser($id){
-    $sql = "DELETE FROM users WHERE id = ?";
-    $stmt = $this->conection->prepare($sql);
-    $stmt->execute([$id]);
- }
+    public function deletuser($id){
+        $sql = "DELETE FROM users WHERE id = ?";
+        $stmt = $this->conection->prepare($sql);
+        $stmt->execute([$id]);
+    }
 
  public function updateuser() {
-        $query = 
+        $sql = 
             "UPDATE users    
              SET firstname='" . $this->firstname . "' ,lastname='". $this->lastname 
              ."' , email='". $this->email ."' , password='". $this->password . "' , role='". $this->role .
               "' WHERE id = " . $this->id;
-      $stmt = $this->conection->prepare($query);
+      $stmt = $this->conection->prepare($sql);
       $stmt->execute();
      }
 

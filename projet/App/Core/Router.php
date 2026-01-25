@@ -50,7 +50,7 @@ class Router
                    $controller->index('updatepro');
                  }
                 break;
-            case '/add':
+               case '/add':
                 $controller = new AdminController();
 
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -59,15 +59,25 @@ class Router
                     $controller->index('addproduct');
                 }
                 break;
-           
+                 case '/addcart':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $controller = new FrontController();
+                $controller->addToCart();
+            }
             break;
 
             case '/card':
                 $controller = new FrontController();
-                $controller->index();
+                $controller->cart();
                 break;
 
-          
+            case '/delete-cart':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $controller = new FrontController();
+                    $controller->deleteCart();
+                }
+                break;
+
 
                 case '/checkout':
                     $controller = new FrontController();

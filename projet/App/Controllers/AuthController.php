@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Controllers;
-use App\Core\Session;
 use App\Models\User;
+use App\Models\Client;
 
 class AuthController{
       public function index($page) {
@@ -14,8 +14,7 @@ class AuthController{
         $Client->setFirstname($_POST['firstname']);
         $Client->setLastname($_POST['lastname']);
         $Client->setEmail($_POST['email']);
-        $Client->setPassword($_POST['password']);
-        $Client->setRole($_POST['role']);
+        $Client->setPassword(password_hash($_POST['password'],PASSWORD_DEFAULT));
         $Client->create();
         header("Location:\login"); 
     }
@@ -25,11 +24,10 @@ class AuthController{
     $email = $_POST['email'];
     $password = $_POST['password'];
     
-
     $usermod = new User();
     $user = $usermod->getUser($email);
 
-    if ($user && $user->getPassword() && $password == $user->getPassword()) {
+    if ($user  &&  password_verify($password,$user->getPassword()) ) {
         session_start();
        $_SESSION['role'] = $user->getRole();
        $_SESSION['id'] = $user->getId();
@@ -45,10 +43,10 @@ class AuthController{
     exit;
 }
 
-
 public function logout(){
     session_start();
-    session_destroy();
+    unset($_SESSION['role']);
+    unset($_SESSION['id']);
     header("Location: /accueil");
 }
 

@@ -17,7 +17,7 @@
         </div>
         <div class="flex items-center space-x-6 text-xl">
             <a href="#"><i class="fas fa-search"></i></a>
-            <a href="/cart" class="relative"><i class="fas fa-shopping-bag"></i></a>
+            <a href="/card" class="relative"><i class="fas fa-shopping-bag"></i></a>
             <a href="/login" class="bg-slate-900 text-white text-sm px-6 py-2 rounded-full font-bold">Login</a>
         </div>
     </nav>
@@ -29,7 +29,7 @@
                 <h1 class="text-6xl md:text-8xl font-black leading-none mb-6">FUTURE IS <br><span class="text-blue-600">IN HAND.</span></h1>
                 <p class="text-slate-500 text-lg mb-8 max-w-md">Discover the latest in high-end electronics. From the new M3 MacBooks to the ultimate smartphones.</p>
                 <div class="flex space-x-4">
-                    <a href="catalog.html" class="bg-blue-600 text-white px-10 py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-blue-200 transition-all">Shop Now</a>
+                    <a href="category" class="bg-blue-600 text-white px-10 py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-blue-200 transition-all">Shop Now</a>
                     <button class="border-2 border-slate-900 px-10 py-4 rounded-xl font-bold hover:bg-slate-900 hover:text-white transition-all">Learn More</button>
                 </div>
             </div>
