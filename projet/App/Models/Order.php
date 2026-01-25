@@ -56,11 +56,17 @@ class Order {
     }
     
     public function getAllorder(){
-        $sql = "SELECT * FROM orders join users on users.id = orders.client_id
-               join order_item on orders.id = order_item.order_id";
+        $sql = "SELECT * FROM orders";
         $stmt = $this->conection->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS,Order::class);
          return $stmt->fetch();
     }
 
+    public function getorderitme(){
+        $sql = "SELECT * FROM order_item WHERE order_id = ?";
+        $stmt = $this->conection->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS,OrderItem::class);
+        $stmt->execute([$this->id]);
+        return $stmt->fetch();
+    }
 }

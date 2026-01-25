@@ -25,7 +25,7 @@
       <a href="/users" class="btn btn-secondary w-100 mb-2">Gérer Utilisateurs</a>
     </div>
     <div class="col-md-4">
-      <a href="orders.php" class="btn btn-success w-100 mb-2">Gérer Commandes</a>
+      <a href="/order" class="btn btn-success w-100 mb-2">Gérer Commandes</a>
     </div>
   </div>
 </div>

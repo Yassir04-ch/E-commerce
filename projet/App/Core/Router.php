@@ -128,6 +128,10 @@ class Router
                 $controller = new FrontController();
                 $controller->index();
                 break;
+             case '/order':
+                $controller = new AdminController();
+                $controller->index('order');
+            break;
 
             default:
                 http_response_code(404);

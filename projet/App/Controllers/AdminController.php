@@ -31,6 +31,10 @@ class AdminController{
         $users = $user->findAll();
         require __DIR__ . "/../Views/back/users.php";
         break;
+        case 'order':
+
+        require __DIR__ . "/../Views/back/order.php";
+        break;
        }
     }
 
@@ -55,7 +59,7 @@ class AdminController{
     $Product->setCategory($categoriee);             
     $Product->addProduct();
     header("Location:/category"); 
-    
+
     }
 
     public function updatePdoduct(){

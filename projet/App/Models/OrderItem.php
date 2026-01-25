@@ -61,4 +61,5 @@ class OrderItem {
         $stmt->execute([$this->order->getId(),$this->product->getId(),$this->quantity,$this->price
         ]);
     }
+
 }
