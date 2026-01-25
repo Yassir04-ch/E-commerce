@@ -1,8 +1,8 @@
 <?php
 namespace App\Models;
 use  App\Core\Database;
-use  App\Core\Order;
-use  App\Core\Product;
+use  App\Models\Order;
+use  App\Models\Product;
 
 use PDO;
 
@@ -54,14 +54,11 @@ class OrderItem {
        $this->order = $order;
     }
     
-    public function save(): void {
+    public function save() {
         $sql = "INSERT INTO order_item (order_id, product_id, quantity, price)
                 VALUES (?, ?, ?, ?)";
         $stmt = $this->conection->prepare($sql);
-        $stmt->execute([$this->order->getId(),
-            $this->product->getId(),
-            $this->quantity,
-            $this->price
+        $stmt->execute([$this->order->getId(),$this->product->getId(),$this->quantity,$this->price
         ]);
     }
 }

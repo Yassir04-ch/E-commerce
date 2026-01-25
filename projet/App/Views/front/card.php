@@ -105,8 +105,8 @@
 
 
         <div class="flex flex-col gap-4 w-full md:w-auto">
-            <a href="/checkout" class="bg-white text-black hover:bg-blue-600 hover:text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest transition-all text-center shadow-2xl shadow-white/5">
-                Proceed to Checkout <i class="fas fa-chevron-right ml-2 text-[10px]"></i>
+            <a href="/send" class="bg-white text-black hover:bg-blue-600 hover:text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest transition-all text-center shadow-2xl shadow-white/5">
+               Send order <i class="fas fa-chevron-right ml-2 text-[10px]"></i>
             </a>
             <p class="text-[10px] text-slate-600 text-center italic font-medium">Secure SSL Encrypted Checkout</p>
         </div>

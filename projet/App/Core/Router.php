@@ -79,9 +79,9 @@ class Router
                 break;
 
 
-                case '/checkout':
+                case '/send':
                     $controller = new FrontController();
-                    $controller->checkout();
+                    $controller->sendorder();
                     break;
 
                 case '/orders':

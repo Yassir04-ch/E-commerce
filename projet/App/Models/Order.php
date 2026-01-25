@@ -30,6 +30,13 @@ class Order {
     public function setClient(Client $client){
       $this->client = $client;
     }
+    
+    public function getStatus(){
+        return $this->status;
+    }
+     public function setStatus($status){
+         $this->status = $status;
+    }
 
     public function getOrderitems(){
         return $this->orderItems;
@@ -39,10 +46,21 @@ class Order {
     }
 
     public function addOrder(){
-      $sql = "INSERT INTO ordes (client_id,status) VALUES (?,?,?)";
+      $sql = "INSERT INTO orders (client_id,status) VALUES (?,?)";
       $stmt = $this->conection->prepare($sql);
       $stmt->execute([$this->client->getId(),$this->status]);
+
+      $this->id = $this->conection->lastInsertId();
+
+      return $this->id;
     }
     
+    public function getAllorder(){
+        $sql = "SELECT * FROM orders join users on users.id = orders.client_id
+               join order_item on orders.id = order_item.order_id";
+        $stmt = $this->conection->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS,Order::class);
+         return $stmt->fetch();
+    }
 
 }

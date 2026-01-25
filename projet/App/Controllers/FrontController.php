@@ -1,9 +1,11 @@
 <?php
 namespace App\Controllers;
 use App\Core\Session;
-use App\Models\User;
+use App\Models\Client;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\order;
+use App\Models\orderItem;
 class FrontController{
     public function index(){
      $product = new Product();
@@ -37,7 +39,7 @@ class FrontController{
     {
         session_start();
 
-        $cart = $_SESSION['cart'];
+        $cart = $_SESSION['cart'] ?? [];
         $productsCart = [];
         $productmod = new Product();
         
@@ -70,6 +72,42 @@ class FrontController{
 
         header("Location: /card");
         exit;
+    }
+    public function sendorder(){
+        session_start();
+        if(!isset($_SESSION['id'])){
+          header("Location:/login"); 
+          exit;
+        }
+        if (!isset($_SESSION['cart'])) {
+          header("location:/category");
+          exit;
+        }
+        $productmod = new Product();
+        $client = new Client();
+        $order = new Order();
+        $client->setId($_SESSION['id']);
+        $order->setClient($client);
+        $order->setStatus('En Attant');
+        $order->addOrder();
+
+        $cart = $_SESSION['cart'];
+        
+        $orderitem = new OrderItem();
+        foreach ($cart as $productId => $qty) {
+            $product = $productmod->findpro($productId);
+            if($product){
+               $orderitem->setOrder($order);
+               $orderitem->setProduct($product);
+               $orderitem->setQuantity($qty);
+               $orderitem->setPrice($product);
+               $orderitem->save();
+            }
+        }
+
+        unset($_SESSION['cart']);
+        header("Location:/category");
+        
     }
 
 }
