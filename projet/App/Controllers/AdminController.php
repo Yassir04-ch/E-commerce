@@ -4,6 +4,8 @@ use App\Core\Session;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\order;
+
 
 class AdminController{
     public function index($view){
@@ -32,7 +34,9 @@ class AdminController{
         require __DIR__ . "/../Views/back/users.php";
         break;
         case 'order':
-
+         $order = new Order();
+         $ordrs =  $order->getAllorder();
+         $ordersitem = $order->getAllorder();
         require __DIR__ . "/../Views/back/order.php";
         break;
        }

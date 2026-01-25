@@ -1,65 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Admin - Commandes Dark</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gestion des Commandes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body style="background-color: #0f172a; color: #f8fafc; font-family: sans-serif; padding: 40px; margin: 0;">
+<body class="bg-[#0f172a] text-slate-200 font-sans p-10">
 
-    <div style="max-width: 900px; margin: 0 auto;">
+    <div class="max-w-4xl mx-auto">
         
-        <h1 style="color: #a78bfa; font-size: 28px; margin-bottom: 30px; border-bottom: 2px solid #1e293b; padding-bottom: 10px;">
-            📊 Gestion des Commandes
+        <h1 class="text-3xl font-bold text-violet-400 mb-8 border-b-2 border-slate-800 pb-4 flex items-center gap-3">
+            <span>📊</span> Gestion des Commandes
         </h1>
 
-        <div style="background-color: #1e293b; border: 1px solid #334155; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.3); margin-bottom: 40px;">
+        <?php if (empty($orders)): ?>
+            <div class="text-center p-10 bg-slate-800 rounded-xl text-slate-400">
+                Aucune commande trouvée pour le moment.
+            </div>
+        <?php else: ?>
             
-            <div style="background-color: #312e81; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <div style="font-size: 14px; color: #c4b5fd; font-weight: bold;">COMMANDE #8824</div>
-                    <div style="font-size: 18px; margin-top: 5px; font-weight: bold;">Client: Ahmed Mansouri</div>
-                </div>
-                <div style="text-align: right;">
-                    <span style="background-color: #fbbf24; color: #000; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 800;">EN ATTENTE</span>
-                    <div style="font-size: 12px; color: #94a3b8; margin-top: 8px;">25 Janvier 2026</div>
-                </div>
-            </div>
+            <?php foreach ($orders as $order): ?>
+                <div class="bg-[#1e293b] border border-slate-700 rounded-2xl overflow-hidden shadow-2xl mb-10 transition hover:border-slate-500">
+                    
+                    <div class="bg-[#312e81] p-6 flex justify-between items-center">
+                        <div>
+                            <div class="text-xs font-black text-violet-300 tracking-widest uppercase">Commande #<?= $order->getId() ?></div>
+                            <div class="text-xl font-bold text-white mt-1">Client ID: <?= $order->getClient_id() ?></div>
+                        </div>
+                        <div class="text-right">
+                           
+                            <span class="px-4 py-1 rounded-full text-xs font-bold border">
+                                <?= $order->getStatus() ?>
+                            </span>
+                            <div class="text-xs text-slate-400 mt-2"><?= $order->getCreated_at() ?></div>
+                        </div>
+                    </div>
 
-            <div style="padding: 20px;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid #334155; text-align: left; color: #94a3b8; font-size: 13px;">
-                            <th style="padding: 10px;">PRODUIT</th>
-                            <th style="padding: 10px; text-align: center;">QTÉ</th>
-                            <th style="padding: 10px; text-align: right;">PRIX</th>
-                            <th style="padding: 10px; text-align: right;">TOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid #1e293b;">
-                            <td style="padding: 15px 10px; color: #e2e8f0;">Smartphone Samsung S24</td>
-                            <td style="padding: 15px 10px; text-align: center;">1</td>
-                            <td style="padding: 15px 10px; text-align: right; color: #94a3b8;">9,500.00 DH</td>
-                            <td style="padding: 15px 10px; text-align: right; font-weight: bold; color: #a78bfa;">9,500.00 DH</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #1e293b;">
-                            <td style="padding: 15px 10px; color: #e2e8f0;">Écouteurs Buds Pro</td>
-                            <td style="padding: 15px 10px; text-align: center;">2</td>
-                            <td style="padding: 15px 10px; text-align: right; color: #94a3b8;">1,200.00 DH</td>
-                            <td style="padding: 15px 10px; text-align: right; font-weight: bold; color: #a78bfa;">2,400.00 DH</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div class="p-6">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-slate-500 text-xs uppercase tracking-wider border-b border-slate-700">
+                                    <th class="pb-3 px-2 font-semibold">Produit</th>
+                                    <th class="pb-3 px-2 text-center font-semibold">Quantité</th>
+                                    <th class="pb-3 px-2 text-right font-semibold">Prix Unit.</th>
+                                    <th class="pb-3 px-2 text-right font-semibold text-violet-400">Sous-total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800">
+                    
+                                <tr class="group hover:bg-slate-800/50 transition">
+                                    <td class="py-4 px-2">
+                                        <span class="text-slate-200 font-medium">Produit<?= $item->getProduct_id() ?></span>
+                                    </td>
+                                    <td class="py-4 px-2 text-center text-slate-400"><?= $item->getQuantity() ?></td>
+                                    <td class="py-4 px-2 text-right text-slate-500"><?= number_format($item->getPrice(), 2) ?> DH</td>
+                                    <td class="py-4 px-2 text-right font-bold text-slate-100"><?= number_format($subtotal, 2) ?> DH</td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
 
-            <div style="background-color: #0f172a; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
-                <div style="color: #64748b; font-size: 14px;">Paiement: <span style="color: #10b981;">Cash on Delivery</span></div>
-                <div style="text-align: right;">
-                    <span style="color: #94a3b8; font-size: 14px;">Total à payer:</span>
-                    <div style="font-size: 24px; font-weight: 900; color: #10b981;">11,900.00 DH</div>
+                    <div class="bg-[#0f172a]/50 p-6 flex justify-between items-center border-t border-slate-700">
+                        <div class="text-sm text-slate-500 font-medium">
+                            Status Paiement: <span class="text-emerald-500">Sécurisé</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-slate-500 block">Total Final</span>
+                            <span class="text-2xl font-black text-emerald-400 tracking-tight">
+                                <?= number_format($totalOrder, 2) ?> <small class="text-xs">DH</small>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        </div>
+
+        <?php endif; ?>
+    </div>
 
 </body>
 </html>

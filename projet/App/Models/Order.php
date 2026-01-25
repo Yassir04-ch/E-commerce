@@ -6,6 +6,7 @@ use PDO;
 class Order {
     private int $id;
     private Client $client;
+    private $created_at;
     private array $orderItems = [];
     private string $status;
     
@@ -23,6 +24,12 @@ class Order {
     }
     public function setId($id){
         $this->id = $id;
+    }
+     public function getcreated_at(){
+        return $this->created_at;
+    }
+    public function setcreated_at($created_at){
+        $this->created_at = $created_at;
     }
     public function getClient(){
         return $this->client;
